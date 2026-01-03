@@ -36,9 +36,12 @@ jobs:
     
     - name: 安装依赖
       run: npm ci
+      working-directory: ./test2
       
     - name: 运行测试
       run: npm test
+      working-directory: ./test2
+
       
     - name: 显示测试结果
       if: always()
