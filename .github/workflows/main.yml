@@ -1,0 +1,47 @@
+# 文件名：.github/workflows/windows-test.yml
+name: Windows CI
+
+# 触发条件
+on:
+  push:
+    branches: [ main, dev ]
+  pull_request:
+    branches: [ main ]
+
+# 工作流
+jobs:
+  # 在 Windows 上运行测试
+  test-on-windows:
+    name: Test on Windows
+    runs-on: windows-latest  # 使用最新的 Windows Server
+    
+    steps:
+    - name: 检出代码
+      uses: actions/checkout@v4
+      
+    - name: 设置 Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: '20'
+        cache: 'npm'
+    
+    - name: 查看系统信息
+      run: |
+        echo "Windows 版本:"
+        systeminfo | findstr /B /C:"OS 名称"
+        echo "Node 版本:"
+        node --version
+        echo "npm 版本:"
+        npm --version
+    
+    - name: 安装依赖
+      run: npm ci
+      
+    - name: 运行测试
+      run: npm test
+      
+    - name: 显示测试结果
+      if: always()
+      run: |
+        echo "测试完成！"
+        echo "可在 Actions 页面查看详细日志"
