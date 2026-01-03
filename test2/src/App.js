@@ -1,8 +1,10 @@
+// App.js
 import React from "react";
 import "./App.css";
 import SentimentOverview from "./components/SentimentOverview";
 import SentimentTrends from "./components/SentimentTrends";
 import SentimentComposition from "./components/SentimentComposition";
+import SentimentFeedbackForm from "./components/SentimentFeedbackForm";  // 新增引入
 
 function App() {
   return (
@@ -15,6 +17,8 @@ function App() {
         <SentimentOverview />
         <SentimentTrends />
         <SentimentComposition />
+        {/* 添加反馈表单 */}
+        <SentimentFeedbackForm />
       </main>
     </div>
   );
